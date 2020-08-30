@@ -1,0 +1,60 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+            <div class="slideshow-container">
+                <!-- Full-width images with number and caption text -->
+              <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="{% static 'images/momo.jpg' %}" width="1000" height="500">
+                <div class="text">Made With Love</div>
+              </div>
+
+              <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="{% static 'images/veg_fried_rice.jpg' %}" width="1000" height="500">
+                <div class="text">Made With Love</div>
+              </div>
+
+              <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="{% static 'images/pasta.jpg' %}" width="1000" height="500">
+                <div class="text">Made With Love</div>
+              </div>
+            </div>
+
+<script type="text/javascript">
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.display = "block";
+        setTimeout(showSlides, 7000); // Change image every 2 seconds
+        }
+</script>
+
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-lg-4">
+            <img class="thumbnail" src="{{product.imageURL}}">
+            <div class="box-element product">
+                <h6><strong>{{product.name}}</strong></h6>
+                <hr>
+                <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to cart</button>
+
+                <h4 style="display: inline-block;float: right">रू{{product.price|floatformat:2}}</h4>
+            </div>
+        </div>
+
+
+        {% endfor %}
+    </div>
+{% endblock content %}
+
